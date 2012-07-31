@@ -1,6 +1,6 @@
 /*
  * BitChange.js v1.0
- * https://github.com/thejf/bitchangejs
+ * https://github.com/TheJF/BitChangeJS
  *
  * Copyright 2012 Jean-Francois Arseneau
  *
