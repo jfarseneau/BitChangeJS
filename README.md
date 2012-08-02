@@ -4,6 +4,10 @@ BitChange.js
 BitChange.js is a jQuery plugin that displays the current MtGox exchange rate 
 when hovering over a Bitcoin amount.
 
+Demo
+----
+http://bitchange.pwntendo.com/
+
 Usage
 -----
 
