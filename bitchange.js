@@ -38,8 +38,8 @@ window.mtgox =
 	btceurURL : 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fmtgox.com%2Fapi%2F1%2FBTCEUR%2Fticker%22&format=json&callback=?',
 	btcjpyURL : 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fmtgox.com%2Fapi%2F1%2FBTCJPY%2Fticker%22&format=json&callback=?',
 	btcgbpURL : 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fmtgox.com%2Fapi%2F1%2FBTCGBP%2Fticker%22&format=json&callback=?',
-	btccnyURL : 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fmtgox.com%2Fapi%2F1%2FBTCCNY%2Fticker%22&format=json&callback=?',
-}
+	btccnyURL : 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fmtgox.com%2Fapi%2F1%2FBTCCNY%2Fticker%22&format=json&callback=?'
+};
 
 /* arrays specifying what classes are valid for conversion */
 window.bitcoinFiat = ['btcusd', 'btccad', 'btceur', 'btcjpy', 'btcgbp', 'btccny'];
@@ -65,7 +65,7 @@ $(bitcoinFiatClasses).hover(
 
 		avgValue = getAverageValue(currencyConversion);
 
-		if (avgValue != 0) // don't run if the JSON failed to load
+		if (avgValue !== 0) // don't run if the JSON failed to load
 		{
 			exchangedValue = originalValue*avgValue;
 			exchangedValue = roundNumber(exchangedValue, 2); // make it look like a currency
@@ -87,7 +87,7 @@ $(fiatBitcoinClasses).hover(
 		var currencyConversion = getConversionType(this);
 
 		avgValue = getAverageValue(currencyConversion);
-		if (avgValue != 0)
+		if (avgValue !== 0)
 		{
 			exchangedValue = originalValue/avgValue;
 			exchangedValue = roundNumber(exchangedValue, 2); // make it look like a currency
@@ -176,8 +176,6 @@ function getSymbol(element)
 		default:
 			return ''; // unknown symbol
 	}
-
-	return false;
 }
 
 /* setupRates:
@@ -214,7 +212,7 @@ function loadRates(currencyConversion)
 			dataType: 'json',
 			success: function(data)
 			{
-				window.mtgox[currencyConversion] = data.query.results.json.return;
+				window.mtgox[currencyConversion] = data.query.results.json["return"];
 			},
 			error: function(jqXHR, textStatus, errorThrown)
 			{
@@ -280,11 +278,11 @@ function getConversionType(element)
 	// else this function wouldn't have triggered.
 	var currencyConversion = '';
 	for (var i = 0; i<classes.length; i++)
-	{	
+	{
 		for (var j = 0; j<conversions.length; j++)
 		{
 			if (classes[i] === conversions[j])
-				return classes[i]
+				return classes[i];
 		}
 	}
 
